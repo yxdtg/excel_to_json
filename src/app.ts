@@ -116,22 +116,26 @@ function excelToJson(excelData: string): string {
                 }
             }
             if (type == "array") {
-                data = data.replace("[", "");
-                data = data.replace("]", "");
-                data = data.split(",") as string[];
+                if (data == "[]") {
+                    data = [];
+                } else {
+                    data = data.replace("[", "");
+                    data = data.replace("]", "");
+                    data = data.split(",") as string[];
 
-                // 自动推断数组中的数据类型 字符串/数值/布尔值
-                for (let k = 0; k < data.length; k++) {
-                    // number
-                    if (!isNaN(Number(data[k]))) {
-                        data[k] = Number(data[k]);
-                    } else {
-                        // boolean
-                        if (data[k] == "TRUE" || data[k] == "true") {
-                            data[k] = true;
+                    // 自动推断数组中的数据类型 字符串/数值/布尔值
+                    for (let k = 0; k < data.length; k++) {
+                        // number
+                        if (!isNaN(Number(data[k]))) {
+                            data[k] = Number(data[k]);
                         } else {
-                            if (data[k] == "FALSE" || data[k] == "false") {
-                                data[k] = false;
+                            // boolean
+                            if (data[k] == "TRUE" || data[k] == "true") {
+                                data[k] = true;
+                            } else {
+                                if (data[k] == "FALSE" || data[k] == "false") {
+                                    data[k] = false;
+                                }
                             }
                         }
                     }
